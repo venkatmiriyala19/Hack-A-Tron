@@ -9,10 +9,11 @@ export default function Signup() {
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
   const nameRef = useRef();
-  const userTypeRef = useRef(); // Add a new ref for the user type input
+  const userTypeRef = useRef();
   const { signup } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [additionalFieldsVisible, setAdditionalFieldsVisible] = useState(false); // State to manage additional fields visibility
   const navigate = useNavigate();
 
   async function handleSubmit(e) {
@@ -28,7 +29,6 @@ export default function Signup() {
 
       const { user } = await signup(emailRef.current.value, passwordRef.current.value);
 
-      // Store additional user information in Firestore, including user type
       const db = getFirestore();
       await addDoc(collection(db, 'users'), {
         uid: user.uid,
@@ -37,13 +37,11 @@ export default function Signup() {
         userType: userTypeRef.current.value,
       });
 
-      // Redirect based on user type
       if (userTypeRef.current.value === 'Company') {
         navigate('/company-dashboard');
       } else if (userTypeRef.current.value === 'Freelancer') {
         navigate('/freelancer-dashboard');
       } else {
-        // Default redirect or handle other cases
         navigate('/');
       }
     } catch (error) {
@@ -52,6 +50,11 @@ export default function Signup() {
 
     setLoading(false);
   }
+
+  // Function to toggle additional fields visibility
+  const handleUserTypeChange = () => {
+    setAdditionalFieldsVisible(userTypeRef.current.value !== ''); // Set visibility based on user type
+  };
 
   return (
     <>
@@ -71,11 +74,31 @@ export default function Signup() {
             </Form.Group>
             <Form.Group id="userType">
               <Form.Label>User Type</Form.Label>
-              <Form.Control as="select" ref={userTypeRef} required>
+              <Form.Control as="select" ref={userTypeRef} onChange={handleUserTypeChange} required>
+                <option value="">Select</option>
                 <option value="Company">Company</option>
                 <option value="Freelancer">Freelancer</option>
               </Form.Control>
             </Form.Group>
+            {additionalFieldsVisible && (
+              <>
+                {/* Additional fields for Company */}
+                {userTypeRef.current.value === 'Company' && (
+                  <Form.Group id="companyField">
+                    <Form.Label>Company Field</Form.Label>
+                    <Form.Control type="text" required />
+                  </Form.Group>
+                )}
+
+                {/* Additional fields for Freelancer */}
+                {userTypeRef.current.value === 'Freelancer' && (
+                  <Form.Group id="freelancerField">
+                    <Form.Label>Freelancer Field</Form.Label>
+                    <Form.Control type="text" required />
+                  </Form.Group>
+                )}
+              </>
+            )}
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required />
