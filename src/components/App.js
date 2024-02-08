@@ -8,6 +8,8 @@ import Login from './Login';
 import PrivateRoute from './PrivateRoute';
 import ForgotPassword from './ForgotPassword';
 import UpdateProfile from './UpdateProfile';
+import CompanyDashboard from './CompanyDashboard';
+
 
 function App() {
   return (
@@ -16,19 +18,28 @@ function App() {
         <Router>
           <AuthProvider>
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <PrivateRoute>
-                    <Dashboard />
-                  </PrivateRoute>
-                }
-              />
+              
               <Route
                 path="/update-profile"
                 element={
                   <PrivateRoute>
                     <UpdateProfile />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/company-dashboard"
+                element={
+                  <PrivateRoute>
+                    <CompanyDashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/freelancer-dashboard"
+                element={
+                  <PrivateRoute>
+                    <Dashboard />
                   </PrivateRoute>
                 }
               />

@@ -8,7 +8,8 @@ export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
-  const nameRef = useRef(); // Add a new ref for the name input
+  const nameRef = useRef();
+  const userTypeRef = useRef(); // Add a new ref for the user type input
   const { signup } = useAuth();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -25,18 +26,26 @@ export default function Signup() {
       setError('');
       setLoading(true);
 
-      // Sign up the user with email and password
       const { user } = await signup(emailRef.current.value, passwordRef.current.value);
 
-      // Store additional user information in Firestore
+      // Store additional user information in Firestore, including user type
       const db = getFirestore();
       await addDoc(collection(db, 'users'), {
         uid: user.uid,
         name: nameRef.current.value,
         email: emailRef.current.value,
+        userType: userTypeRef.current.value,
       });
 
-      navigate('/');
+      // Redirect based on user type
+      if (userTypeRef.current.value === 'Company') {
+        navigate('/company-dashboard');
+      } else if (userTypeRef.current.value === 'Freelancer') {
+        navigate('/freelancer-dashboard');
+      } else {
+        // Default redirect or handle other cases
+        navigate('/');
+      }
     } catch (error) {
       setError('Failed to create an account');
     }
@@ -59,6 +68,13 @@ export default function Signup() {
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required />
+            </Form.Group>
+            <Form.Group id="userType">
+              <Form.Label>User Type</Form.Label>
+              <Form.Control as="select" ref={userTypeRef} required>
+                <option value="Company">Company</option>
+                <option value="Freelancer">Freelancer</option>
+              </Form.Control>
             </Form.Group>
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
