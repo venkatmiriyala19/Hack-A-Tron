@@ -8,6 +8,7 @@ export default function Dashboard() {
   const [error, setError] = useState('');
   const [name, setName] = useState(''); // State to store the user's name
   const { currentUser, logout } = useAuth();
+  const [workingExperience, setWorkingExperience] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function Dashboard() {
 
         querySnapshot.forEach((doc) => {
           setName(doc.data().name);
+          setWorkingExperience(doc.data().workingExperience || '');
         });
       } catch (error) {
         setError('Failed to fetch user data');
@@ -49,9 +51,12 @@ export default function Dashboard() {
           <strong>Email: </strong> {currentUser.email}
           <br />
           <strong>Name: </strong> {name}
-          <Link to="/update-profile" className="btn btn-primary w-100 mt-3">
-            Update Profile
-          </Link>
+          <br />
+          {workingExperience && (
+  <>
+    <strong>Working Experience: </strong> {workingExperience} <br />
+  </>
+)}
         </Card.Body>
       </Card>
       <div className="w-100 text-center mt-2">
