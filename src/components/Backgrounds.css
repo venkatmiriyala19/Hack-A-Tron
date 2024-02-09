@@ -1,0 +1,13 @@
+.dashboard{
+    background: url("https://images.unsplash.com/photo-1438302292089-1bfacb810383?q=80&w=1776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+.login{
+    background: url("https://wallpapers.com/images/featured/minimalist-7xpryajznty61ra3.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    
+}

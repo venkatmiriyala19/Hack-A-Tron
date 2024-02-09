@@ -1,9 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState,useEffect} from 'react';
 import { Form, Button, Card, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
-
+import './Signup.css';
 export default function Signup() {
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -22,6 +22,15 @@ export default function Signup() {
   const [termsAccepted, setTermsAccepted] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companyId, setCompanyId] = useState('');
+  const [isHovered, setIsHovered] = useState(false);
+  const linkStyle={
+    textDecoration: 'none',color: isHovered ? 'aliceblue' : '#386677',
+  }
+
+
+  useEffect(() => {
+    document.body.className = 'Signup';
+  }, []);
 
   const handleUserTypeChange = () => {
     setAdditionalFieldsVisible(userTypeRef.current.value !== '');
@@ -88,7 +97,7 @@ export default function Signup() {
 
   return (
     <>
-      <Card>
+      <Card style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius:'26px',color:"#162734"}}>
         <Card.Body>
           <h2 className='text-center mb-4'>Sign Up</h2>
 
@@ -96,11 +105,11 @@ export default function Signup() {
           <Form onSubmit={handleSubmit}>
             <Form.Group id="email">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="email" ref={emailRef} required />
+              <Form.Control type="email" ref={emailRef} required style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}  />
             </Form.Group>
             <Form.Group id="userType">
               <Form.Label>User Type</Form.Label>
-              <Form.Control as="select" ref={userTypeRef} onChange={handleUserTypeChange} required>
+              <Form.Control as="select" ref={userTypeRef} onChange={handleUserTypeChange} required style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}>
                 <option value="">Select</option>
                 <option value="Company">Company</option>
                 <option value="Freelancer">Freelancer</option>
@@ -117,6 +126,7 @@ export default function Signup() {
                         ref={companyNameRef}
                         onChange={(e) => setCompanyName(e.target.value)}
                         required
+                        style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}
                       />
                     </Form.Group>
                     <Form.Group id="location">
@@ -126,6 +136,7 @@ export default function Signup() {
                         ref={locationRef}
                         // Add onChange if needed
                         required
+                        style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}
                       />
                     </Form.Group>
                     <Form.Group id="companyId">
@@ -135,6 +146,7 @@ export default function Signup() {
                         ref={companyIdRef}
                         onChange={(e) => setCompanyId(e.target.value)}
                         required
+                        style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}
                       />
                     </Form.Group>
                   </>
@@ -144,7 +156,7 @@ export default function Signup() {
                   <>
                     <Form.Group id="name">
                       <Form.Label>Full Name</Form.Label>
-                      <Form.Control type="text" ref={nameRef} required />
+                      <Form.Control type="text" ref={nameRef} required style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}} />
                     </Form.Group>
                     <Form.Group id="workingExperience">
                       <Form.Label>Working Experience</Form.Label>
@@ -153,6 +165,7 @@ export default function Signup() {
                         ref={workingExperienceRef}
                         // Add onChange if needed
                         required
+                        style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}
                       />
                     </Form.Group>
                   </>
@@ -161,11 +174,11 @@ export default function Signup() {
             )}
             <Form.Group id="password">
               <Form.Label>Password</Form.Label>
-              <Form.Control type="password" ref={passwordRef} required />
+              <Form.Control type="password" ref={passwordRef} required style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}} />
             </Form.Group>
             <Form.Group id="password-confirm">
               <Form.Label>Confirm Password</Form.Label>
-              <Form.Control type="password" ref={passwordConfirmRef} required />
+              <Form.Control type="password" ref={passwordConfirmRef} required style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}/>
             </Form.Group>
 
             <Form.Group controlId="termsCheckbox" className='mt-2 mb-2'>
@@ -174,17 +187,19 @@ export default function Signup() {
                 label="I accept the terms and conditions"
                 onChange={() => setTermsAccepted(!termsAccepted)}
                 required
+                style={{color:"#162734"}}
               />
             </Form.Group>
 
-            <Button disabled={loading} className="w-100" type="submit">
+            <Button disabled={loading} className="w-100" type="submit" style={{backgroundColor:'#162734', border:'0',color:'#bee4ed'}}>
               Sign Up
             </Button>
           </Form>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2">
-        Already have an account? <Link to="/login">Login</Link>
+      <div className="w-100 text-center mt-2" style={{color:'#a6d4de'}}>
+        Already have an account? <Link to="/login"  style={linkStyle}  onMouseOver={() => setIsHovered(true)}
+      onMouseOut={() => setIsHovered(false)}>Login</Link>
       </div>
     </>
   );

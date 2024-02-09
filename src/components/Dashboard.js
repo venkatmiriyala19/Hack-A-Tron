@@ -3,6 +3,7 @@ import { Card, Button, Alert } from 'react-bootstrap';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
+import './Backgrounds.css';
 
 export default function Dashboard() {
   const [error, setError] = useState('');
@@ -12,6 +13,7 @@ export default function Dashboard() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.body.className = 'dashboard';
     async function fetchUserName() {
       const db = getFirestore();
       const usersCollection = collection(db, 'users');
