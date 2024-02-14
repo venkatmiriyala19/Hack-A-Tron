@@ -1,6 +1,7 @@
 import React from 'react';
 import Signup from './Signup';
 import { Container } from 'react-bootstrap';
+import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from '../contexts/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Dashboard from './Dashboard';
@@ -14,6 +15,7 @@ import Success from './Success';
 
 function App() {
   return (
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Router>
@@ -53,6 +55,7 @@ function App() {
         </Router>
       </div>
     </Container>
+    </BrowserRouter>
   );
 }
 
