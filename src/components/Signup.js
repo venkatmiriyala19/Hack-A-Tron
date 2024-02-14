@@ -24,7 +24,7 @@ export default function Signup() {
   const [companyId, setCompanyId] = useState('');
   const [isHovered, setIsHovered] = useState(false);
   const linkStyle={
-    textDecoration: 'none',color: isHovered ? 'aliceblue' : '#386677',
+    textDecoration: 'none',color: isHovered ? '#435a91' : 'aliceblue',
   }
 
 
@@ -99,15 +99,16 @@ export default function Signup() {
     <>
       <Card style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius:'26px',color:"#162734"}}>
         <Card.Body>
-          <h2 className='text-center mb-4'>Sign Up</h2>
+          <h2 className='text-center mb-2'>Sign Up</h2>
 
           {error && <Alert variant="danger">{error}</Alert>}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group id="email">
+          <Form onSubmit={handleSubmit} >
+            <Form.Group id="email" style={{marginBottom:"15px"}}>
               <Form.Label>Email</Form.Label>
               <Form.Control type="email" ref={emailRef} required style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}  />
             </Form.Group>
-            <Form.Group id="userType">
+            
+            <Form.Group id="userType"  style={{marginBottom:"15px"}}>
               <Form.Label>User Type</Form.Label>
               <Form.Control as="select" ref={userTypeRef} onChange={handleUserTypeChange} required style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}>
                 <option value="">Select</option>
@@ -119,7 +120,7 @@ export default function Signup() {
               <>
                 {userTypeRef.current.value === 'Company' && (
                   <>
-                    <Form.Group id="companyName">
+                    <Form.Group id="companyName"  style={{marginBottom:"15px"}}>
                       <Form.Label>Company Name</Form.Label>
                       <Form.Control
                         type="text"
@@ -129,7 +130,7 @@ export default function Signup() {
                         style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}
                       />
                     </Form.Group>
-                    <Form.Group id="location">
+                    <Form.Group id="location"  style={{marginBottom:"15px"}}>
                       <Form.Label>Location</Form.Label>
                       <Form.Control
                         type="text"
@@ -139,7 +140,7 @@ export default function Signup() {
                         style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}
                       />
                     </Form.Group>
-                    <Form.Group id="companyId">
+                    <Form.Group id="companyId"  style={{marginBottom:"15px"}}>
                       <Form.Label>Company ID</Form.Label>
                       <Form.Control
                         type="text"
@@ -154,11 +155,11 @@ export default function Signup() {
 
                 {userTypeRef.current.value === 'Freelancer' && (
                   <>
-                    <Form.Group id="name">
+                    <Form.Group id="name"  style={{marginBottom:"15px"}}>
                       <Form.Label>Full Name</Form.Label>
                       <Form.Control type="text" ref={nameRef} required style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}} />
                     </Form.Group>
-                    <Form.Group id="workingExperience">
+                    <Form.Group id="workingExperience"  style={{marginBottom:"15px"}}>
                       <Form.Label>Working Experience</Form.Label>
                       <Form.Control
                         type="text"
@@ -172,16 +173,16 @@ export default function Signup() {
                 )}
               </>
             )}
-            <Form.Group id="password">
+            <Form.Group id="password"  style={{marginBottom:"15px"}}>
               <Form.Label>Password</Form.Label>
               <Form.Control type="password" ref={passwordRef} required style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}} />
             </Form.Group>
-            <Form.Group id="password-confirm">
+            <Form.Group id="password-confirm"  style={{marginBottom:"15px"}}>
               <Form.Label>Confirm Password</Form.Label>
               <Form.Control type="password" ref={passwordConfirmRef} required style={{backgroundColor:'rgba(255,255,255,0.7)',color:"#162734"}}/>
             </Form.Group>
 
-            <Form.Group controlId="termsCheckbox" className='mt-2 mb-2'>
+            <Form.Group controlId="termsCheckbox" className='mt-2 mb-2'  style={{marginBottom:"15px"}}>
               <Form.Check
                 type="checkbox"
                 label="I accept the terms and conditions"
@@ -191,13 +192,13 @@ export default function Signup() {
               />
             </Form.Group>
 
-            <Button disabled={loading} className="w-100" type="submit" style={{backgroundColor:'#162734', border:'0',color:'#bee4ed'}}>
+            <Button disabled={loading} className="w-100" type="submit" style={{backgroundColor:'#749ece', border:'0',color:'rgba(0,2,35,255)'}}>
               Sign Up
             </Button>
           </Form>
         </Card.Body>
       </Card>
-      <div className="w-100 text-center mt-2" style={{color:'#a6d4de'}}>
+      <div className="w-100 text-center mt-2" style={{color:'rgba(0,2,35,255)'}}>
         Already have an account? <Link to="/login"  style={linkStyle}  onMouseOver={() => setIsHovered(true)}
       onMouseOut={() => setIsHovered(false)}>Login</Link>
       </div>
