@@ -15,7 +15,7 @@ import Success from './Success';
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
+   
     <Container className="d-flex align-items-center justify-content-center" style={{ minHeight: "100vh" }}>
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Router>
@@ -55,7 +55,7 @@ function App() {
         </Router>
       </div>
     </Container>
-    </BrowserRouter>
+    
   );
 }
 
