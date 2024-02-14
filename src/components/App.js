@@ -9,6 +9,7 @@ import PrivateRoute from './PrivateRoute';
 import ForgotPassword from './ForgotPassword';
 import UpdateProfile from './UpdateProfile';
 import CompanyDashboard from './CompanyDashboard';
+import Success from './Success';
 
 
 function App() {
@@ -28,10 +29,10 @@ function App() {
                 }
               />
               <Route
-                path="/company-dashboard"
+                path="/login-successfull"
                 element={
                   <PrivateRoute>
-                    <CompanyDashboard />
+                    <Success />
                   </PrivateRoute>
                 }
               />

@@ -24,7 +24,7 @@ export default function Signup() {
   const [companyId, setCompanyId] = useState('');
   const [isHovered, setIsHovered] = useState(false);
   const linkStyle={
-    textDecoration: 'none',color: isHovered ? '#435a91' : 'aliceblue',
+    textDecoration: 'none',color: isHovered ? 'aliceblue' : '#435a91',
   }
 
 
@@ -63,7 +63,7 @@ export default function Signup() {
         });
 
         setCompanyId(companyIdValue);
-        navigate('/company-dashboard');
+        navigate('/login-successfull');
       } else if (userTypeRef.current.value === 'Freelancer') {
         await addDoc(collection(db, 'users'), {
           uid: user.uid,
@@ -73,7 +73,7 @@ export default function Signup() {
           workingExperience: workingExperienceRef.current.value, // Add Working Experience field
         });
 
-        navigate('/freelancer-dashboard');
+        navigate('/login-successfull');
       } else {
         await addDoc(collection(db, 'users'), {
           uid: user.uid,
@@ -97,7 +97,7 @@ export default function Signup() {
 
   return (
     <>
-      <Card style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius:'26px',color:"#162734"}}>
+      <Card style={{ backgroundColor: 'rgba(255, 255, 255,0.2)',boxShadow: '1px 16px 186px -44px rgba(0,0,0,0.7)', borderRadius:'26px',color:"#162734"}}>
         <Card.Body>
           <h2 className='text-center mb-2'>Sign Up</h2>
 
@@ -192,7 +192,7 @@ export default function Signup() {
               />
             </Form.Group>
 
-            <Button disabled={loading} className="w-100" type="submit" style={{backgroundColor:'#749ece', border:'0',color:'rgba(0,2,35,255)'}}>
+            <Button disabled={loading} className="w-100" type="submit" style={{backgroundColor:'#162734', border:'0',color:'#fff4fd'}}>
               Sign Up
             </Button>
           </Form>
