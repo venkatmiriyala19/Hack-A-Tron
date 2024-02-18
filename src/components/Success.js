@@ -18,7 +18,7 @@ const SignupSuccessPage = () => {
       <h1>Signup Successful</h1>
       <p>Your account has been successfully created!</p>
       <p>
-        Please go back to <Link to="/" style={{textDecoration:'none',color:'rgb(157, 133, 252)'}}>Home Page</Link> and login again
+        Please go back to <Link to="https://hire-a-hand.vercel.app/" style={{textDecoration:'none',color:'rgb(157, 133, 252)'}}>Home Page</Link> and login again
       </p>
     </div>
   );
